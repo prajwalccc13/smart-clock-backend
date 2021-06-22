@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from smartclock.models import Room, Device
+
+admin.site.register(Room)
+admin.site.register(Device)
