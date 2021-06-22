@@ -10,7 +10,7 @@ class Device(models.Model):
 
 class Room(models.Model):
     name = models.CharField(max_length=20)
-    devices = models.ForeignKey(on_delete=models.CASCADE)
+    devices = models.ForeignKey(Device,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
