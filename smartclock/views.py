@@ -82,6 +82,6 @@ class DeviceDetailView(generics.RetrieveUpdateDestroyAPIView):
         serializer = DeviceSerializer(device, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            appliance(pk,request.data["status"])
+            appliance(pk,request.data["status"], request.data['pin'])
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

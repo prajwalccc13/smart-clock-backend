@@ -1,8 +1,19 @@
+import RPi.GPIO as GPIO
+
 from smartclock.models import Room, Device
 
-def appliance(device_id, status):
+def appliance(device_id, status, pin):
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+
+    GPIO.setup(pin, GPIO.OUT)
+
+
     if status == "True":
-        print(str(device_id)+" is turned On")
+        GPIO.output(pin, GPIO.LOW)
     else:
-        print(f'{device_id} is turned Off')
+        GPIO.output(pin, GPIO.HIGH)
+
+
 
