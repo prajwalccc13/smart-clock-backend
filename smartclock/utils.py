@@ -9,11 +9,13 @@ def appliance(device_id, status, pin):
 
     GPIO.setup(pin, GPIO.OUT)
 
-
-    if status == "True":
+    print(status)
+    if status == "true":
         GPIO.output(pin, GPIO.LOW)
+        print("inside true")
     else:
         GPIO.output(pin, GPIO.HIGH)
+	print("inside false")
 
 
 
