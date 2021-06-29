@@ -10,9 +10,26 @@ from smartclock.models import Room, Device
 from smartclock.utils import *
 
 
-class RoomListView(generics.ListCreateAPIView):
+class RoomView(generics.ListCreateAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
+
+    def post(self, request):
+        data = request.data
+        name = data['name']
+        icon_data = data['icon_data']
+        room = Room.objects.create(
+            name=name,
+            icon_data=icon_data
+        )
+        room.save()
+        serializer = RoomSerializer(room, many=False)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def get(self, request):
+        rooms_all = Room.objects.all()
+        serializer = RoomSerializer(rooms_all, many=True)
+        return Response(serializer.data)
 
 
 class RoomDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -21,9 +38,38 @@ class RoomDetailView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "pk"
         
 
-class DeviceListView(generics.ListCreateAPIView):
+class DeviceListCreateView(views.APIView):
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
+
+    def post(self, request, pk):
+        data = request.data
+        name = data['name']
+        device_status = data['status']
+        icon_data = data['icon_data']
+        # room = data['room']
+        pin = data['pin']
+        room = Room.objects.get(pk=pk)
+        device = Device.objects.create(
+            name=name,
+            status=device_status,
+            icon_data=icon_data,
+            room=room,
+            pin=pin,
+        )
+        serializer = DeviceSerializer(device, many=False)
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+
+    def get(self, request, pk):
+        try:
+            room = Room.objects.get(pk=pk)
+            device = Device.objects.filter(room=room)
+            serializer = DeviceSerializer(device, many=True)
+            return Response(serializer.data)
+        except Device.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        
 
 
 class DeviceDetailView(generics.RetrieveUpdateDestroyAPIView):
