@@ -24,7 +24,7 @@ days - {
 }
 """
 
-def alarm(AlarmTime, AlarmDays):
+def alarm():
     while True:
         alarmFlagJson = open('alarmFlag.json')
         alarmFlag = json.load(alarmFlagJson)
@@ -126,7 +126,7 @@ def alarm(AlarmTime, AlarmDays):
             # print(str(time_second) + '------------------++++++' + str(alarm_split[1]))
 
             for alarm_data in days_time[today]:
-                if(time_hour == alarm_data['hour'] and time_minute == alarm_data['minute']):
+                if(time_hour == alarm_data['hour'] and time_minute == alarm_data['minute'] and time_second < 10):
                     print('-------------')
                     p = multiprocessing.Process(target=playsound, args=("./sounds/alarmSoundLove.mp3",))
                     p.start()
@@ -137,14 +137,14 @@ def alarm(AlarmTime, AlarmDays):
 
             time.sleep(1)
 
-days = {
-    'sunday': True,
-    'monday': True,
-    'tuesday': True,
-    'wednesday': True,
-    'thursday': True,
-    'friday': True,
-    'saturday': True,
-}
-alarmTime = "23:30"
-alarm(alarmTime, days)
+# days = {
+#     'sunday': True,
+#     'monday': True,
+#     'tuesday': True,
+#     'wednesday': True,
+#     'thursday': True,
+#     'friday': True,
+#     'saturday': True,
+# }
+# alarmTime = "23:30"
+alarm()
