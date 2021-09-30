@@ -24,6 +24,7 @@ days - {
 }
 """
 
+flagValues.setRoutineFlag()
 
 
 def alarm():

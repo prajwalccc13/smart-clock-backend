@@ -8,8 +8,10 @@ import requests
 import flagValues
 
 
+flagValues.setRoutineFlag()
+
 def alarm():
-    url = 'http://192.168.1.15:8000/'
+    url = 'http://192.168.1.9:8000/'
     while True:
         routineFlagJson = open('routineFlag.json')
         routineFlag = json.load(routineFlagJson)
