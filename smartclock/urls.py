@@ -12,6 +12,6 @@ urlpatterns = [
     path("automated-task/", AutomatedTaskView.as_view(), name='automated-task-list-create'),
     path("automated-task/<int:pk>/", EditAutomatedTask.as_view(), name='automated-task-edit'),
     path("task/", TaskView.as_view(), name='task-list-create'),
-    path("task/<int:pk>/", TaskView.as_view(), name='task-list-create'),
+    path("task/<int:pk>/", EditTask.as_view(), name='task-list-create'),
     path("automated-task/<int:pk>/tasks/", TaskList.as_view(), name='task-list'),
 ]
