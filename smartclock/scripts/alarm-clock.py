@@ -24,6 +24,8 @@ days - {
 }
 """
 
+
+
 def alarm():
     day_check = {
         'sunday': False,
@@ -34,12 +36,13 @@ def alarm():
         'friday': False,
         'saturday': False,
     }
+    url = 'http://192.168.1.9:8000/api/alarm'
     while True:
         alarmFlagJson = open('alarmFlag.json')
         alarmFlag = json.load(alarmFlagJson)
 
         if(alarmFlag['alarm_flag']):
-            x = requests.get('http://192.168.1.9:8000/api/alarm').json()
+            x = requests.get(url).json()
             sunday = []
             monday = []
             tuesday = []

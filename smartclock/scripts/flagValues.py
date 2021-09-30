@@ -27,8 +27,6 @@ def unsetAlarmFlag():
 Flag for routines
 """
 
-routine_flag = False
-
 def setRoutineFlag():
     flags = {
         "routine_flag": True,
@@ -44,6 +42,3 @@ def unsetRoutineFlag():
     json_object = json.dumps(flags, indent = 4)
     with open("routineFlag.json", "w") as outfile:
         outfile.write(json_object)
-
-
-unsetRoutineFlag()
