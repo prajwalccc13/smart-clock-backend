@@ -85,12 +85,12 @@ class DeviceDetailView(generics.RetrieveUpdateDestroyAPIView):
             serializer.save()
             print(request.data['status'])
             print(type(request.data['status']))
-            status = request.data['status']
+            statuS = request.data['status']
             if request.data['status'] == 'True':
-                status = True
+                statuS = True
             if request.data['status'] == 'False':
-                status = False
-            appliance(pk,status, request.data['pin'])
+                statuS = False
+            appliance(pk,statuS, request.data['pin'])
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -128,3 +128,13 @@ class TaskList(views.APIView):
         tasks = Task.objects.filter(automatedtask= pk)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
+
+
+class DoTask(views.APIView):
+    def get(self,request, pk):
+        tasks = Task.objects.filter(automatedtask=pk)
+        for task in tasks:
+            device = Device.objects.get(id=task.device.id)
+            if task.status:
+                appliance(pk,task.to_do, device.pin)
+        return Response(data="Success")

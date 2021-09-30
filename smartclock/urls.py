@@ -14,4 +14,5 @@ urlpatterns = [
     path("task/", TaskView.as_view(), name='task-list-create'),
     path("task/<int:pk>/", EditTask.as_view(), name='task-list-create'),
     path("automated-task/<int:pk>/tasks/", TaskList.as_view(), name='task-list'),
+    path('automated-task/<int:pk>/do/', DoTask.as_view(),name='task-do'),
 ]
