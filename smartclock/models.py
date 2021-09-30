@@ -57,7 +57,7 @@ class Task(models.Model):
     automatedtask = models.ForeignKey(AutomatedTask, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
-    pin = models.IntegerField()
+    # pin = models.IntegerField()
     status = models.BooleanField()
 
     def __str__(self) -> str:
