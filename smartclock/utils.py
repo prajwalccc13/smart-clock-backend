@@ -15,7 +15,6 @@ def appliance(device_id, status, pin):
         print("inside true")
     else:
         GPIO.output(pin, GPIO.HIGH)
-	print("inside false")
 
 
 
