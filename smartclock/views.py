@@ -4,8 +4,8 @@ from rest_framework import generics, views
 from rest_framework.response import Response
 from rest_framework import status
 
-from smartclock.serializers import RoomSerializer, DeviceSerializer
-from smartclock.models import Room, Device
+from smartclock.serializers import AlarmSerializer, AutomatedTaskSerializer, RoomSerializer, DeviceSerializer, TaskSerializer
+from smartclock.models import Alarm, AutomatedTask, Room, Device, Task
 
 from smartclock.utils import *
 
@@ -85,3 +85,36 @@ class DeviceDetailView(generics.RetrieveUpdateDestroyAPIView):
             appliance(pk,request.data["status"], request.data['pin'])
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class AlarmView(generics.ListCreateAPIView):
+    queryset = Alarm.objects.all()
+    serializer_class = AlarmSerializer
+
+class EditAlarm(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Alarm.objects.all()
+    serializer_class = AlarmSerializer
+
+
+class AutomatedTaskView(generics.ListCreateAPIView):
+    queryset = AutomatedTask.objects.all()
+    serializer_class = AutomatedTaskSerializer
+
+class EditAutomatedTask(generics.RetrieveUpdateDestroyAPIView):
+    queryset = AutomatedTask.objects.all()
+    serializer_class = AutomatedTaskSerializer
+
+
+class TaskView(generics.ListCreateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+class EditTask(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+class TaskList(views.APIView):
+    def get(self, request, pk):
+        tasks = Task.objects.filter(automatedtask= pk)
+        serializer = TaskSerializer(tasks, many=True)
+        return Response(serializer.data)
