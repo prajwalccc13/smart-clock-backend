@@ -25,6 +25,15 @@ days - {
 """
 
 def alarm():
+    day_check = {
+        'sunday': False,
+        'monday': False,
+        'tuesday': False,
+        'wednesday': False,
+        'thursday': False,
+        'friday': False,
+        'saturday': False,
+    }
     while True:
         alarmFlagJson = open('alarmFlag.json')
         alarmFlag = json.load(alarmFlagJson)
