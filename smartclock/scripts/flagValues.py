@@ -10,15 +10,16 @@ def setAlarmFlag():
         "alarm_flag": True,
     }
     json_object = json.dumps(flags, indent = 4)
-    with open("alarmFlag.json", "w") as outfile:
+    with open("smartclock/scripts/alarmFlag.json", "w") as outfile:
         outfile.write(json_object)
+        print("from models")
 
 def unsetAlarmFlag():
     flags = {
         "alarm_flag": False,
     }
     json_object = json.dumps(flags, indent = 4)
-    with open("alarmFlag.json", "w") as outfile:
+    with open("smartclock/scripts/alarmFlag.json", "w") as outfile:
         outfile.write(json_object)
 
 
@@ -32,7 +33,7 @@ def setRoutineFlag():
         "routine_flag": True,
     }
     json_object = json.dumps(flags, indent = 4)
-    with open("routineFlag.json", "w") as outfile:
+    with open("smartclock/scripts/routineFlag.json", "w") as outfile:
         outfile.write(json_object)
 
 def unsetRoutineFlag():
@@ -40,5 +41,5 @@ def unsetRoutineFlag():
         "routine_flag": False,
     }
     json_object = json.dumps(flags, indent = 4)
-    with open("routineFlag.json", "w") as outfile:
+    with open("smartclock/scripts/routineFlag.json", "w") as outfile:
         outfile.write(json_object)

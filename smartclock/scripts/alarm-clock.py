@@ -39,7 +39,7 @@ def alarm():
     }
     url = 'http://192.168.1.9:8000/api/alarm'
     while True:
-        alarmFlagJson = open('alarmFlag.json')
+        alarmFlagJson = open('smartclock/scripts/alarmFlag.json')
         alarmFlag = json.load(alarmFlagJson)
 
         if(alarmFlag['alarm_flag']):
