@@ -8,7 +8,7 @@ from smartclock.serializers import AlarmSerializer, AutomatedTaskSerializer, Roo
 from smartclock.models import Alarm, AutomatedTask, Room, Device, Task
 
 from smartclock.utils import *
-import smartclock.scripts.flagValues as flag_values
+
 
 
 class RoomView(generics.ListCreateAPIView):
@@ -97,12 +97,10 @@ class DeviceDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class AlarmView(generics.ListCreateAPIView):
     queryset = Alarm.objects.all()
-    flag_values.setAlarmFlag()
     serializer_class = AlarmSerializer
 
 class EditAlarm(generics.RetrieveUpdateDestroyAPIView):
     queryset = Alarm.objects.all()
-    flag_values.setAlarmFlag()
     serializer_class = AlarmSerializer
 
 

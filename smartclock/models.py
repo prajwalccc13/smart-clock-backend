@@ -1,4 +1,8 @@
 from django.db import models
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+
+import smartclock.scripts.flagValues as flag_values 
 
 
 class Room(models.Model):
@@ -63,3 +67,14 @@ class Task(models.Model):
 
     def __str__(self) -> str:
         return self.device.name + " - " + self.automatedtask.title 
+
+
+@receiver([post_save, post_delete], sender=AutomatedTask)
+def change_routine_flag(sender, instance, **kwargs):
+    flag_values.setRoutineFlag()
+    print("routine flag updated!")
+
+@receiver([post_save, post_delete], sender=Alarm)
+def change_alarm_flag(sender, instance, **kwargs):
+    flag_values.setAlarmFlag()
+    print("alarm flag updated!")

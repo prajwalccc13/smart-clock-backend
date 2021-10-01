@@ -11,7 +11,7 @@ import flagValues
 def alarm():
     url = 'http://192.168.1.15:8000/'
     while True:
-        routineFlagJson = open('routineFlag.json')
+        routineFlagJson = open('smartclock/scripts/routineFlag.json')
         routineFlag = json.load(routineFlagJson)
 
         # Retrive all routine data when any change occur in routine model
